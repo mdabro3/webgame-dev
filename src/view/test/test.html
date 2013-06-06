@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Testing Processing and jQuery</title>
+<script src="/static/jquery-1.7.2.min.js"></script>
+<script src="/static/processing-1.3.6.min.js"></script>
+
+<script type="text/javascript">
+	function loadMap(){
+		var pjs = Processing.getInstanceById("MAP");
+		if (pjs == undefined){
+                        return setTimeout(loadMap, 200);
+		}
+		$.getJSON("", function(data){
+			if (data){
+				for(p=0, end=data.hexes.length; p<end; p++){
+					pjs.addHex(data.hexes[p]);
+				}
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<canvas id="MAP" data-processing-sources="/static/gui.pde"></canvas>
+</body>
+</html>

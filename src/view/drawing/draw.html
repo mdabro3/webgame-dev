@@ -1,0 +1,74 @@
+{% extends "home/base.html" %}
+{% block content %}
+<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/processing-1.3.6.min.js"></script>
+
+<script type="text/javascript">                                         
+	function clearPoints() {
+		$.post("/point/clear");
+	}
+	function newPoint(x, y) {
+		$.post("/point/points", {'x':x, 'y':y} );
+	}
+	function listen_for_events(timestamp) {
+		url = "/point/events";
+		var pjs = Processing.getInstanceById("sketch");
+		if (pjs == undefined) {
+			return setTimeout(listen_for_events, 200);
+		}
+		if (timestamp != null){
+			url += ("/" + timestamp);
+		}
+		$.ajax(url, { success:
+			function(data, code, xhr) {
+				if (data.event.type == 'create') {
+					for (var i=0, end=data.event.data.length; i<end; i++) {
+						var point = data.event.data[i];
+						pjs.addPoint(point.x, point.y);
+					}
+				}
+				if (data.event.type == 'clear') {
+					pjs.clearPoints();
+				}
+				listen_for_events(data.timestamp);
+			}
+		});
+	}
+	function resizeMap() {
+		var map = document.getElementById('map');
+		var ratio = 4/3;
+		var newWidth = window.innerWidth;
+		var newHeight = window.innerHeight - 160;
+		var newRatio = newWidth / newHeight;
+
+		if (newRatio > ratio) {
+			newWidth = newHeight * ratio;
+			map.style.height = newHeight + 'px';
+			map.style.width = newWidth + 'px';
+		} else {
+			newHeight = newWidth /ratio;
+			map.style.height = newHeight + 'px';
+			map.style.width = newWidth + 'px';
+		}
+		
+		map.style.marginTop = (-newHeight / 2) + 'px';
+		map.style.marginLeft = (-newWidth / 2) + 'px';
+
+		var mapCanvas = document.getElementById('sketch');
+		mapCanvas.width = newWidth;
+		mapCanvas.height = newHeight;
+		var pjs = Processing.getInstanceById("sketch");
+		pjs.height = newHeight;
+		pjs.width = newWidth;
+		pjs.redraw();
+	}
+	window.addEventListener('resize', resizeMap, false);
+	window.addEventListener('orientationchange', resizeMap, false);
+	$(listen_for_events());
+</script>
+
+<div id="map">
+	<canvas id="sketch" data-processing-sources="/static/map.pde /static/control.pde /static/map_editor.pde"></canvas>
+	<div id="clear"><button type="button" id="clearPoints" onclick="clearPoints()">CLEAR</button></div>
+</div>
+{% endblock %}

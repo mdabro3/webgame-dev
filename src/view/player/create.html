@@ -1,0 +1,18 @@
+{% extends "home/base.html" %}
+{% block title %}Add new player:{% endblock %}
+
+{% block content %}
+{% if error %}
+<font color="red">{{ error }}</font>
+{% else %}
+<form method="post">
+Enter a new user name:
+<input type="text" name="player_name"></textarea><br>
+Enter a email address:
+<input type="text" name="email"></textarea><br>
+Enter a new password:
+<input type="password" name="password"><br>
+<input type="submit">
+</form>
+{% endif %}
+{% endblock %}

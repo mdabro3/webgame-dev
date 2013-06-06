@@ -1,0 +1,2 @@
+-module(line, [Id, X1, Y1, X2, Y2]).
+-compile(export_all).

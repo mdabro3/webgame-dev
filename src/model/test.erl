@@ -1,0 +1,2 @@
+-module(test, [Id, Text]).
+-compile(export_all).

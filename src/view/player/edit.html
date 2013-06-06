@@ -1,0 +1,20 @@
+{% extends "home/base.html" %}
+{% block title %}Editing: {{ player.name }}{% endblock %}
+
+{% block content %}
+<h1>Editing Player: <i>{{ player.name }}</i></h1>
+<form method="post" action="{% url action="save_edit" %}">
+<input type="hidden" name="id" value={{ player.id }}/>
+Enter a new user name:
+<input type="text" name="player_name" value={{ player.name }}></textarea><br>
+Enter a new email address:
+<input type="text" name="player_name" value={{ player.email }}></textarea><br>
+Enter a new password:
+<input type="password" name="password"><br>
+<input type="submit">
+</form>
+<form method="post" action="{% url action="delete" %}">
+<input type="hidden" name="player_id" value={{ player.id }}>
+<input type="submit" value="Delete User">
+</form>
+{% endblock %}

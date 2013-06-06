@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Boss Testing</title>
+		<link rel="stylesheet" type="text/css" href="/static/global.css"></link>
+		<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="header">
+				<div id="main-nav" class="float-left">Main Nav</div>
+				<div id="nav" class="float-left">Nav 1</div>
+				<div id="nav" class="float-left">Nav 2</div>
+				<div id="nav" class="float-left">Nav 3</div>
+				<div class="clear"></div>
+			</div>
+			<div id="content-container" class="float-left">
+				<div id="main-content">{% block content %}{% endblock %}</div>
+				<div id="side-bar" class="float-right">
+					<div id="side-bar-header">Header</div>
+					<div id="side-bar-nav">Side Nav 1</div>
+					<div id="side-bar-nav">Side Nav 2</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+	<script>
+		//alert("SUP!");
+		//$("#main-content").load("/drawing/draw");
+	</script>
+
+	</body>
+
+</html>

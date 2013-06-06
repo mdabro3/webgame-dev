@@ -1,0 +1,24 @@
+{% extends "home/base.html" %}
+<title>{% block title %}Players:{% endblock %}</title>
+<a href="/player/logout">Logout</a>
+{% block content %}
+<ul>
+{% if players %}
+	{%for player in players %}
+		<li>{{ player.name }}
+	{% endfor %}
+{% else %}
+	<li>No players!
+{% endif %}
+</ul>
+<p><a href="{% url action="create" %}">New Player..</a></p>
+<form method="post" action="{% url action="edit" %}">
+Edit:
+<select name="player_id">
+{% for player in players %}
+<option value="{{ player.id }}">{{ player.name }}
+{% endfor %}
+</select>
+<input type="submit">
+</form>
+{% endblock %}
