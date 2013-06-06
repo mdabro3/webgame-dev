@@ -8,6 +8,7 @@ class Control {
 	boolean[] locked;
 	boolean[] keyDown;
 	int[] keyCodes = {};
+	str handle = "Handling: ";
 
 
 	Control() {
@@ -41,16 +42,16 @@ class Control {
 	}
 
 	protected void handleKey(char key) {
-		int keyCode = int(key),
+		int keyCode = int(key);
 		len = keyCodes.length;
 		int[] _tmp = new int[len+1];
 		arrayCopy(keyCodes,0,_tmp,0,len);
 		_tmp[len] = keyCode;
 		keyCodes = _tmp;
+		handle = handle + str(key) + ",";
 	}
 
 	protected boolean isKeyDown(char key) {
-		ellipse(500,500,20,20);
 		int keyCode = int(key);
 		return keyDown[keyCode];
 	}
@@ -77,11 +78,8 @@ class Control {
 	void keyReleased() { myKeyReleased(key, keyCode); }
 
 	void viewLoop() {
-		ellipse(300,300,20,20);
 		if (keyPressed) {
-			ellipse(400,400,20,20);
 			if (isKeyDown('W')) {
-				ellipse(300,200,20,20);
                         	TRANSLATE_Y += TRANSLATE_RATE;
                 	}
                 	if (isKeyDown('S')) {
@@ -94,6 +92,19 @@ class Control {
                 	        TRANSLATE_X -= TRANSLATE_RATE;
                 	}
         	}
+	}
+
+	void printStatus() {
+		for(int i = 0; i < keyCodes.length(); i++){
+			text(handle, 10, 190, 200, 600);
+			//text(str(keyCodes.length()), 10, 200 + (10 * i), 100, 100);
+			str message = str(keyCodes[i]) + ": ";
+			if (keyDown[i]) {
+				message = message + "up";}
+			else {
+				message = message + "down";}
+			text(message, 10, 200 + (10 * i), 100, 100);
+		}
 	}
 
 	void scale_up() {

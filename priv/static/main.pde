@@ -7,6 +7,9 @@ void setup(){
 	resizeMap();
 }
 
+void keyPressed() { myControl.keyPressed(key, keyCode); }
+void keyReleased() { myControl.keyReleased(key, keyCode); }
+
 Map myMap = new Map('Test');
 
 void draw(){
@@ -17,6 +20,7 @@ void draw(){
 	scale(myControl.SCALE);
 	myControl.viewLoop();
 	myMap.draw();
+	myControl.printStatus();
 	String s = "Scale: " + str(myControl.SCALE.toFixed(2));
 	text(s, 10, 10, 200, 100);
 	popMatrix();
