@@ -94,7 +94,10 @@ class Hex extends Tile {
 		pushMatrix();
 		translate(x, y);
 		scale(size);
-		fill(c_fill);
+		if (mouse_over())
+			fill(color(255,0,0));
+		else
+			fill(c_fill);
 		beginShape();
 		vertex(0,b);
 		vertex(a,0);
@@ -104,6 +107,18 @@ class Hex extends Tile {
 		vertex(a,2*b);
 		endShape(CLOSE);
 		popMatrix();
+	}
+
+	bool mouse_over(){
+		if (mouseX < x)
+			return false;
+		if (mouseY < y)
+			return false;
+		if (mouseX > x + 2*a + c)
+			return false;
+		if (mouseY > y + 2*a + c)
+			return false;
+		return true;
 	}
 
 	static float x_offset(float size){

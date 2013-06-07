@@ -8,7 +8,6 @@ class Control {
 	boolean[] locked;
 	boolean[] keyDown;
 	int[] keyCodes = {};
-	str handle = "Handling: ";
 
 
 	Control() {
@@ -48,7 +47,6 @@ class Control {
 		arrayCopy(keyCodes,0,_tmp,0,len);
 		_tmp[len] = keyCode;
 		keyCodes = _tmp;
-		handle = handle + str(key) + ",";
 	}
 
 	protected boolean isKeyDown(char key) {
@@ -92,19 +90,6 @@ class Control {
                 	        TRANSLATE_X -= TRANSLATE_RATE;
                 	}
         	}
-	}
-
-	void printStatus() {
-		for(int i = 0; i < keyCodes.length(); i++){
-			text(handle, 10, 190, 200, 600);
-			//text(str(keyCodes.length()), 10, 200 + (10 * i), 100, 100);
-			str message = str(keyCodes[i]) + ": ";
-			if (keyDown[i]) {
-				message = message + "up";}
-			else {
-				message = message + "down";}
-			text(message, 10, 200 + (10 * i), 100, 100);
-		}
 	}
 
 	void scale_up() {
