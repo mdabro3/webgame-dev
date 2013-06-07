@@ -116,7 +116,7 @@ class Hex extends Tile {
 			return false;
 		if (mouseX > x + 2*a + c)
 			return false;
-		if (mouseY > y + 2*a + c)
+		if (mouseY > y + 2*b)
 			return false;
 		return true;
 	}
