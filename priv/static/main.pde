@@ -10,7 +10,7 @@ void setup(){
 void keyPressed() { myControl.keyPressed(key, keyCode); }
 void keyReleased() { myControl.keyReleased(key, keyCode); }
 
-Map myMap = new Map('Test', 10, 10, 40);
+Map myMap = new Map('Test', 20, 20, 20);
 
 void draw(){
 	background(0);
