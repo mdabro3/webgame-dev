@@ -9,7 +9,7 @@ login('GET', []) ->
 
 login('POST', []) ->
         Name = Req:post_param("name"),
-        case boss_db:find(player, [{name, Name}], 1) of
+        case boss_db:find(player, [{name, Name}]) of
                 [Player] ->
                         case Player:check_password(Req:post_param("password")) of
                                 true ->

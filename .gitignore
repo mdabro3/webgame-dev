@@ -1,0 +1,7 @@
+*~
+*.swp
+*.dump
+rebar
+data/
+log/
+ebin/

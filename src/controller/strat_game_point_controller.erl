@@ -3,7 +3,7 @@
 
 events('GET', []) ->
 	Fn = fun(X) -> [{x,X:x()},{y,X:y()}] end,
-	Points = lists:map(Fn, boss_db:find(point, [], all, 0, n, num_ascending)),
+	Points = lists:map(Fn, boss_db:find(point, [])),
 	TimeStamp = boss_mq:now("events"),
 	{json, [{event, [{type, 'create'}, {data, Points}]}, {timestamp, TimeStamp}]};
 
